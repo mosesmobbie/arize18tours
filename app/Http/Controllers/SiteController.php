@@ -2,28 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactDetails;
+use App\Helpers\ContactHelper;
+use App\Models\Fleet;
 use App\Models\Service;
 use App\Models\TextWidget;
-use App\Models\Fleet;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use stdClass;
 
 class SiteController extends Controller
 {
     //
     public function index()
     {
-        $contactDetails = Cache::remember('contact_details.active', now()->addMinutes(30), function () {
-            return ContactDetails::query()->where('active', true)->get();
-        });
-        $contact = new stdClass();
-
-        foreach ($contactDetails as $contactDetail) {
-            $contact->{$contactDetail->key} = $contactDetail->value;
-        }
+        $contact = ContactHelper::getActive();
 
         $services = $this->getAllServices();
 

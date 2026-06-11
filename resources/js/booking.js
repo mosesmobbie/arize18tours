@@ -8,7 +8,11 @@ function initBookingForm() {
   var phoneInput = document.querySelector('input[name="phone"]');
   var pickupAddressInput = document.querySelector('input[name="pickup_address"]');
   var dropoffAddressInput = document.querySelector('input[name="dropoff_address"]');
+  var pickupDateInput = document.querySelector('input[name="pickup_date"]');
+  var pickupTimeDisplayInput = document.querySelector('[name="pickup_time_display"]');
   var pickupTimeInput = document.querySelector('input[name="pickup_time"]');
+  var dropoffDateInput = document.querySelector('input[name="dropoff_date"]');
+  var dropoffTimeDisplayInput = document.querySelector('[name="dropoff_time_display"]');
   var dropoffTimeInput = document.querySelector('input[name="dropoff_time"]');
   var passengersInput = document.querySelector('input[name="passengers"]');
   var transmissionInput = document.querySelector('[name="transmission"]');
@@ -18,12 +22,14 @@ function initBookingForm() {
   var notesInput = document.querySelector('input[name="notes"]');
   var passengersRow = document.getElementById('field-passengers-row');
   var dropoffAddressRow = document.getElementById('field-dropoff-address-row');
+  var dropoffDateRow = document.getElementById('field-dropoff-date-row');
   var dropoffTimeRow = document.getElementById('field-dropoff-time-row');
   var transmissionRow = document.getElementById('field-transmission-row');
   var flightNumberRow = document.getElementById('field-flight-number-row');
   var reservationNumberRow = document.getElementById('field-reservation-number-row');
   var idNumberRow = document.getElementById('field-id-number-row');
   var dropoffAddressLabel = document.getElementById('dropoff-address-label');
+  var dropoffDateLabel = document.getElementById('dropoff-date-label');
   var dropoffTimeLabel = document.getElementById('dropoff-time-label');
 
   if (!serviceTypeSelect || !form) {
@@ -37,7 +43,8 @@ function initBookingForm() {
     emailInput,
     phoneInput,
     pickupAddressInput,
-    pickupTimeInput,
+    pickupDateInput,
+    pickupTimeDisplayInput,
     notesInput,
   ];
 
@@ -206,8 +213,42 @@ function initBookingForm() {
     validateSouthAfricanPhone();
     validatePassengers();
     validateIdOrPassport();
+    syncPickupDateTime();
+    syncDropoffDateTime();
 
     return form.checkValidity();
+  }
+
+  function syncPickupDateTime() {
+    if (!pickupTimeInput) {
+      return;
+    }
+
+    var pickupDate = pickupDateInput ? pickupDateInput.value.trim() : '';
+    var pickupTime = pickupTimeDisplayInput ? pickupTimeDisplayInput.value.trim() : '';
+
+    if (pickupDate && pickupTime) {
+      pickupTimeInput.value = pickupDate + 'T' + pickupTime;
+      return;
+    }
+
+    pickupTimeInput.value = '';
+  }
+
+  function syncDropoffDateTime() {
+    if (!dropoffTimeInput) {
+      return;
+    }
+
+    var dropoffDate = dropoffDateInput ? dropoffDateInput.value.trim() : '';
+    var dropoffTime = dropoffTimeDisplayInput ? dropoffTimeDisplayInput.value.trim() : '';
+
+    if (dropoffDate && dropoffTime) {
+      dropoffTimeInput.value = dropoffDate + 'T' + dropoffTime;
+      return;
+    }
+
+    dropoffTimeInput.value = '';
   }
 
   function updateConditionalFields() {
@@ -219,7 +260,8 @@ function initBookingForm() {
     setBaseRequiredFields();
 
     setFieldState(dropoffAddressRow, dropoffAddressInput, hasDropoffAddress, true);
-    setFieldState(dropoffTimeRow, dropoffTimeInput, isCarHire, true);
+    setFieldState(dropoffDateRow, dropoffDateInput, isCarHire, true);
+    setFieldState(dropoffTimeRow, dropoffTimeDisplayInput, isCarHire, true);
     setFieldState(passengersRow, passengersInput, serviceType !== 'car-hire', passengersRequired);
     setFieldState(transmissionRow, transmissionInput, serviceType === 'car-hire', true);
     setFieldState(flightNumberRow, flightNumberInput, serviceType === 'airport-transfers', true);
@@ -233,6 +275,15 @@ function initBookingForm() {
     if (dropoffAddressInput && !hasDropoffAddress) {
       dropoffAddressInput.value = '';
       dropoffAddressInput.setCustomValidity('');
+    }
+
+    if (dropoffDateInput && !isCarHire) {
+      dropoffDateInput.value = '';
+    }
+
+    if (dropoffTimeDisplayInput && !isCarHire) {
+      dropoffTimeDisplayInput.value = '';
+      dropoffTimeDisplayInput.setCustomValidity('');
     }
 
     if (dropoffTimeInput && !isCarHire) {
@@ -254,10 +305,15 @@ function initBookingForm() {
       }
     }
 
-    if (dropoffTimeLabel) {
-      dropoffTimeLabel.textContent = serviceType === 'car-hire' ? 'Return Date & Time' : 'Drop Off Date & Time';
+    if (dropoffDateLabel) {
+      dropoffDateLabel.textContent = serviceType === 'car-hire' ? 'Return Date' : 'Drop Off Date';
     }
 
+    if (dropoffTimeLabel) {
+      dropoffTimeLabel.textContent = serviceType === 'car-hire' ? 'Return Time' : 'Drop Off Time';
+    }
+
+    syncDropoffDateTime();
     validateSouthAfricanPhone();
     validateIdOrPassport();
   }
@@ -319,8 +375,26 @@ function initBookingForm() {
     });
   }
 
+  if (pickupDateInput) {
+    pickupDateInput.addEventListener('input', syncPickupDateTime);
+  }
+
+  if (pickupTimeDisplayInput) {
+    pickupTimeDisplayInput.addEventListener('input', syncPickupDateTime);
+  }
+
+  if (dropoffDateInput) {
+    dropoffDateInput.addEventListener('input', syncDropoffDateTime);
+  }
+
+  if (dropoffTimeDisplayInput) {
+    dropoffTimeDisplayInput.addEventListener('input', syncDropoffDateTime);
+  }
+
   updateConditionalFields();
   updateActiveTab(serviceTypeSelect.value);
+  syncPickupDateTime();
+  syncDropoffDateTime();
 
   serviceTypeSelect.addEventListener('change', function () {
     updateConditionalFields();

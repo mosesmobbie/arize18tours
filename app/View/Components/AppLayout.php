@@ -2,12 +2,9 @@
 
 namespace App\View\Components;
 
-use App\Models\ContactDetails;
-use Illuminate\Support\Facades\Cache;
+use App\Helpers\ContactHelper;
 use Illuminate\View\Component;
 use Illuminate\View\View;
-use App\Models\Service;
-use App\Models\Fleet;
 
 class AppLayout extends Component
 {
@@ -16,6 +13,8 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        return view('layouts.app', [
+            'contact' => ContactHelper::getActive(),
+        ]);
     }
 }

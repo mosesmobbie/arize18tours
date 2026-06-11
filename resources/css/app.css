@@ -781,7 +781,7 @@ section { padding: 90px 40px; }
 
 .why-img-accent .accent-text {
     font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 42px;
     color: white;
     line-height: 1;
@@ -1146,6 +1146,12 @@ section { padding: 90px 40px; }
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4.5-8 5-8-5V6l8 5 8-5v2.5Z'/%3E%3C/svg%3E");
 }
 
+.cta-icon--whatsapp,
+.cta-icon--phone,
+.cta-icon--email {
+    color: #ffffff;
+}
+
 .cta-sub a, .footer-contact-item a {
     text-decoration: none;
     color: inherit;
@@ -1363,3 +1369,9 @@ footer {
 }
 
 .text-danger { color: var(--red); }
+input,
+select {
+    width: 160% !important;
+    color: #1f2937!important;
+}
+

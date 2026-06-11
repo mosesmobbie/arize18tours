@@ -1,15 +1,14 @@
 @props([
     'services' => collect(),
     'selectedService' => 'shuttle',
-    'wide' => false,
 ])
 
 @php
     $pickupDateValue = '';
-    $pickupTimeValue = '10:00';
+    $pickupTimeValue = '';
     $pickupDateTime = old('pickup_time');
     $dropoffDateValue = '';
-    $dropoffTimeValue = '10:00';
+    $dropoffTimeValue = '';
     $dropoffDateTime = old('dropoff_time');
     $pickupTimeOptions = [];
 
@@ -45,11 +44,6 @@
         box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
     }
 
-    #booking.booking-card.booking-card--wide {
-        width: min(1460px, calc(100% - 28px));
-        max-width: 1460px;
-    }
-
     #booking .booking-card-header {
         margin-bottom: 0;
         background: #111d32;
@@ -78,7 +72,7 @@
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 1px;
-
+        text-transform: uppercase;
         color: #8a8f9a;
         cursor: pointer;
         border-bottom: 3px solid transparent;
@@ -131,10 +125,11 @@
         gap: 5px;
     }
 
-    #booking label {
-        font-size: 10px;
+    reservation_number {
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 1px;
+
         color: #1b2b4b;
     }
 
@@ -197,7 +192,7 @@
     }
 </style>
 
-<div class="booking-card {{ $wide ? 'booking-card--wide' : '' }}" id="booking">
+<div class="booking-card" id="booking">
     <div class="booking-card-header">
         <h3>Request a Quote</h3>
     </div>

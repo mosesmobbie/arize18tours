@@ -21,7 +21,7 @@ class Booking extends Model
         'passengers',
         'transmission',
         'flight_number',
-        'reversation_number',
+        'reservation_number',
         'id_number',
         'notes',
         'status'

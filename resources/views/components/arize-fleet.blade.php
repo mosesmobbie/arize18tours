@@ -5,11 +5,8 @@
         <div class="section-label">Our Vehicles</div>
         <h2 class="section-title">The <span>Fleet</span></h2>
       </div>
-      @unless(request()->routeIs('booking'))
-        <div class="fleet-controls">
-          <a href="#booking" class="btn-primary">Book a Vehicle</a>
-        </div>
-      @endunless
+
+        <p class="section-desc">From airport pickups to cross-provincial tours, we provide safe and comfortable transport across South Africa.</p>
     </div>
     <div class="fleet-grid" id="fleetGrid">
       @foreach ($fleet as $vehicle)

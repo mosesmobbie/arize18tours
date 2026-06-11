@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    {{-- @include('partials.booking-form') --}}
+    <x-booking-form :services="$services" :wide="true"/>
   </div>
 </section>
 <div class="trust-bar">
@@ -65,8 +65,7 @@
         </div>
         <div class="why-img-accent">
           <div>
-            <div class="accent-text">Since<br>2022</div>
-            <span class="accent-sub">Black-Owned &middot; Gauteng</span>
+            <div class="accent-text"> - Integrity<br> - Kindness<br> - Focus</div>
           </div>
         </div>
       </div>
@@ -115,7 +114,7 @@
         $phoneDisplay = preg_replace('/^27/', '0', $phoneNumber);
         $phoneDisplay = preg_replace('/^(\d{3})(\d{3})(\d{4})$/', '$1-$2-$3', $phoneDisplay);
       @endphp
-      <div class="cta-sub"><a href="https://wa.me/{{ $whatsappNumber }}" title="WhatsApp" target="_blank" rel="noopener noreferrer"><span class="cta-icon cta-icon--whatsapp" aria-hidden="true"></span><span>{{ $whatsappDisplay }}</span></a> <a href="tel:+{{ $phoneNumber }}" title="Call" class="cta-contact-phone"><span class="cta-icon cta-icon--phone" aria-hidden="true"></span><span>{{ $phoneDisplay }}</span></a> &middot; <a href="mailto:{{$contact->email}}" title="Email"><span class="cta-icon cta-icon--email" aria-hidden="true"></span><span>{{$contact->email}}</span></a></div>
+      <div class="cta-sub"><a href="https://wa.me/{{ $whatsappNumber }}" title="WhatsApp" target="_blank" rel="noopener noreferrer"><span class="cta-icon cta-icon--whatsapp" aria-hidden="true"></span><span>{{ $whatsappDisplay }}</span></a> <a href="tel:+{{ $phoneNumber }}" title="Call" class="cta-contact-phone"><span class="cta-icon cta-icon--phone" aria-hidden="true"></span><span>{{ $phoneDisplay }}</span></a>  <a href="mailto:{{$contact->email}}" title="Email"><span class="cta-icon cta-icon--email" aria-hidden="true"></span><span>{{$contact->email}}</span></a></div>
     </div>
     <a href="#booking" class="btn-white">Get Your Quote &rarr;</a>
   </div>

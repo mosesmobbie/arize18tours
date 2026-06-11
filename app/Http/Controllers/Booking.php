@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ContactHelper;
+use App\Models\Booking as BookingModel;
 use App\Models\Service;
 use App\Models\Fleet;
 use Illuminate\Http\Request;
@@ -13,6 +15,7 @@ class Booking extends Controller
     //
     public function index(Request $request)
     {
+        $contact = ContactHelper::getActive();
         $services = Service::query('slug','title')->where('status', true)->get();
         $selectedService = $request->query('service');
 
@@ -22,6 +25,7 @@ class Booking extends Controller
             'services' => $services,
             'selectedService' => $selectedService,
             'fleet' => $fleet,
+            'contact' => $contact
         ]);
     }
 
@@ -58,7 +62,8 @@ class Booking extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Process the booking data here
+        // Persist only validated fields.
+        BookingModel::create($validator->validated());
 
         return redirect()
             ->back()
