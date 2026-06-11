@@ -1368,6 +1368,17 @@ footer {
     .footer-bottom { flex-direction: column; text-align: center; }
 }
 
+@media (max-width: 640px) {
+    .fleet-card {
+        flex: 0 0 100%;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
 .text-danger { color: var(--red); }
 input,
 select {

@@ -1,4 +1,8 @@
-<x-app-layout meta-title="About Us - Arize18 Travel and Tours" meta-description="Learn about Arize18 Tours, a black-owned shuttle service in Gauteng. Discover our mission, values, and commitment to safe, reliable transportation." meta-keywords="Arize18 Tours, About Us, Shuttle Service, Gauteng, Black-Owned Business, Transportation Services">
+<x-app-layout
+    :meta-title="$service->title . ' - Arize18'"
+    :meta-description="\Illuminate\Support\Str::limit(strip_tags($service->description), 160)"
+    :meta-keywords="$service->meta_keywords ?: ($service->title . ', Arize18 Tours, Shuttle Service, Gauteng')"
+>
     <style>
         #about .section-title {
             font-size: clamp(1.6rem, 3vw, 2.4rem);
@@ -52,16 +56,22 @@
         <div class="section-inner">
             <h3 class="section-title">Services: <span>{{ $service->title }}</span></h3>
 
-            <div class="mt-6 flex flex-col gap-6 lg:flex-row lg:items-start">
-                <div class="w-full lg:w-3/4">
+            <div class="mt-6 grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)] lg:items-start">
+                <div class="w-full">
                     <article class="my-4 w-full max-w-3xl flex flex-col shadow">
                         <img class="w-full h-auto object-cover" src="/storage/{{ $service->image }}">
                     </article>
+
+                    <div class="section-desc service-rich-text">{!! $service->description !!}
+                        <p class="font-bold italic">All services subject to availability. Terms and conditions apply. Requirements may vary; our team will confirm specifics upon booking.</p>
+                    </div>
+
+                    <p class="mt-3"><a href="{{ route('booking', ['service' => $service->slug]) }}" class="btn-primary">Book {{ $service->title }}</a></p>
                 </div>
 
-                <aside class="w-full max-w-2xl lg:w-1/4 lg:max-w-none">
+                <aside class="w-full max-w-2xl lg:max-w-none lg:sticky lg:top-6">
                     @php($activeSlug = request()->route('slug'))
-                    <div class="services-sidebar-card rounded-2xl border border-gray-200 bg-white p-4 shadow-sm lg:sticky ">
+                    <div class="services-sidebar-card rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
                         <div class="section-label">Our Services</div>
                         <ul class="mt-2 space-y-1 text-sm font-bold">
                             @foreach($options as $slug => $title)
@@ -82,12 +92,6 @@
                 </aside>
 
             </div>
-
-            <div class="section-desc service-rich-text">{!! $service->description !!}
-                <p class="font-bold italic">All services subject to availability. Terms and conditions apply. Requirements may vary; our team will confirm specifics upon booking.</p>
-            </div>
-
-            <p class="mt-3"><a href="{{ route('booking', ['service' => $service->slug]) }}" class="btn-primary">Book {{ $service->title }}</a></p>
         </div>
     </section>
 

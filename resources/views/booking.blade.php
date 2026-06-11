@@ -45,9 +45,9 @@
                         transport regulations, including valid operating permits. Contact us today for quotes, custom
                         packages, or bookings. Let us serve you with pride!
                     </p>
-                    <div class="booking-page-top"></div>
+
                     <x-booking-form :services="$services" :selected-service="$selectedService ?? 'shuttle'" />
-                    <div class="booking-page-bottom"></div>
+
                 </div>
 
                 <div class="hidden lg:block lg:w-1/4 lg:max-w-none space-y-6">

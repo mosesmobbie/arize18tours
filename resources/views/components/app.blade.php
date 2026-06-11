@@ -8,7 +8,7 @@
         <title>{{  isset($metaTitle) ? $metaTitle: 'Arize18 Travel & Tours'}}</title>
         <meta name="author" content="Tiyisani Mchavi">
         <meta name="description" content="{{ isset($metaDescription) ? $metaDescription : 'Shuttle Services, Airport Transfers, Hotel Transfers, Tours & Safaris, Chauffer Drive, reservation_number, Doot to Door, Social Events' }}">
-        <link rel="icon" type="image/jpeg" href="{{ asset('storage/favicon.jpg') }}">
+        <link rel="icon" type="image/jpeg" href="{{ asset('storage/favicon.ico') }}">
         <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 

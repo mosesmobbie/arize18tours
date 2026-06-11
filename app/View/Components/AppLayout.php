@@ -8,6 +8,13 @@ use Illuminate\View\View;
 
 class AppLayout extends Component
 {
+    public function __construct(
+        public ?string $metaTitle = null,
+        public ?string $metaDescription = null,
+        public ?string $metaKeywords = null,
+    ) {
+    }
+
     /**
      * Get the view / contents that represents the component.
      */
@@ -15,6 +22,9 @@ class AppLayout extends Component
     {
         return view('layouts.app', [
             'contact' => ContactHelper::getActive(),
+            'metaTitle' => $this->metaTitle,
+            'metaDescription' => $this->metaDescription,
+            'metaKeywords' => $this->metaKeywords,
         ]);
     }
 }
