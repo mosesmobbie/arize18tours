@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\InvoiceController;
 use \App\Http\Controllers\Booking;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,11 @@ Route::get('/services/{slug}', [SiteController::class, 'services'])->name('servi
 Route::get('/fleet', [SiteController::class, 'fleet'])->name('fleet');
 Route::get('/booking', [Booking::class, 'index'])->name('booking');
 Route::post('/booking', [Booking::class, 'store'])->name('booking.store');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/invoice/preview', [InvoiceController::class, 'preview'])->name('invoice.preview');
+    Route::get('/invoice/download', [InvoiceController::class, 'generateInvoice'])->name('invoice.download');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
