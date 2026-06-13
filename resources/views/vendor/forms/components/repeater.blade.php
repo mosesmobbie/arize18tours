@@ -375,8 +375,7 @@
                         wire:loading.attr="disabled"
                         type="button"
                         size="sm"
-                        color="secondary"
-                        outlined
+                        style="background-color: #1b2b4b; border-color: #1b2b4b; color: #ffffff;"
                     >
                         Calculate
                     </x-forms::button>

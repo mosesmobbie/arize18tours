@@ -56,8 +56,8 @@
         <div class="section-inner">
             <h3 class="section-title">Services: <span>{{ $service->title }}</span></h3>
 
-            <div class="mt-6 grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)] lg:items-start">
-                <div class="w-full">
+            <div class="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_240px] lg:items-start xl:grid-cols-[minmax(0,3fr)_260px]">
+                <div class="order-1 w-full lg:col-start-1">
                     <article class="my-4 w-full max-w-3xl flex flex-col shadow">
                         <img class="w-full h-auto object-cover" src="/storage/{{ $service->image }}">
                     </article>
@@ -69,7 +69,7 @@
                     <p class="mt-3"><a href="{{ route('booking', ['service' => $service->slug]) }}" class="btn-primary">Book {{ $service->title }}</a></p>
                 </div>
 
-                <aside class="w-full max-w-2xl lg:max-w-none lg:sticky lg:top-6">
+                <aside class="order-2 max-w-2xl lg:col-start-2 lg:w-[240px] lg:max-w-[240px] lg:shrink-0 lg:justify-self-end lg:sticky lg:top-6 xl:w-[260px] xl:max-w-[260px]">
                     @php($activeSlug = request()->route('slug'))
                     <div class="services-sidebar-card rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
                         <div class="section-label">Our Services</div>
