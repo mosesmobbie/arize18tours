@@ -34,7 +34,7 @@
 
 <style>
     #booking.booking-card {
-        width: min(1216px, calc(100% - 28px));
+        width: min(1240px, calc(100% - 20px));
         max-width: 1216px;
         margin: 24px auto;
         padding: 0;
@@ -46,7 +46,7 @@
     }
 
     #booking.booking-card.booking-card--wide {
-        width: min(1460px, calc(100% - 28px));
+        width: min(1500px, calc(100% - 20px));
         max-width: 1460px;
     }
 
@@ -176,12 +176,16 @@
 
     @media (max-width: 768px) {
         #booking.booking-card {
-            width: calc(100% - 16px);
-            margin: 16px auto;
+            width: calc(100% - 8px);
+            margin: 12px auto;
+        }
+
+        #booking.booking-card.booking-card--wide {
+            width: calc(100% - 6px);
         }
 
         #booking form {
-            padding: 14px;
+            padding: 16px;
         }
 
         #booking .booking-two-column > .form-row,

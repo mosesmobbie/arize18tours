@@ -18,7 +18,7 @@ class SiteController extends Controller
 
         $services = $this->getAllServices();
 
-        $fleet = $this->getAllFleet();
+        $fleet = $this->getAllFleet()->shuffle();
 
         return view('welcome', ['contact' => $contact, 'services' => $services, 'fleet' => $fleet]);
     }

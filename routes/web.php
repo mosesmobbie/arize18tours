@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\InvoiceController;
 use \App\Http\Controllers\Booking;
+use App\Http\Controllers\FleetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,7 @@ Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/about-us', [SiteController::class, 'about'])->name('about-us');
 Route::redirect('/services', '/services/shuttle');
 Route::get('/services/{slug}', [SiteController::class, 'services'])->name('services');
-Route::get('/fleet', [SiteController::class, 'fleet'])->name('fleet');
+Route::get('/fleet', [FleetController::class, 'index'])->name('fleet');
 Route::get('/booking', [Booking::class, 'index'])->name('booking');
 Route::post('/booking', [Booking::class, 'store'])->name('booking.store');
 

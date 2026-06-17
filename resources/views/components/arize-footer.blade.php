@@ -39,7 +39,7 @@
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li><a href="{{ route('about-us') }}">About Us</a></li>
                 <li><a href="{{ route('services', ['slug' => 'shuttle']) }}">Services</a></li>
-                <li><a href="{{ route('home') }}#fleet">Fleet</a></li>
+                <li><a href="{{ route('fleet') }}">Fleet</a></li>
                 <li><a href="{{ route('booking') }}">Booking</a></li>
             </ul>
         </div>

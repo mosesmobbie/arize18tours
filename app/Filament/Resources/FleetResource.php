@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FleetResource\Pages;
-use App\Filament\Resources\FleetResource\RelationManagers;
 use App\Models\Fleet;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FleetResource extends Resource
 {
@@ -47,8 +44,10 @@ class FleetResource extends Resource
                     ->maxLength(65535),
                 Forms\Components\FileUpload::make('image')
                     ->image()
+                    ->required(fn (string $context): bool => $context === 'create')
                     ->disk('public')
                     ->directory('fleet')
+                    ->imagePreviewHeight('180')
                     ->visibility('public'),
                 Forms\Components\TextInput::make('passengers')
                     ->required(),
@@ -68,16 +67,62 @@ class FleetResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('transmission'),
+                Tables\Columns\TextColumn::make('model'),
+                Tables\Columns\TextColumn::make('year'),
+                Tables\Columns\TextColumn::make('transmission')
+                    ->label('T')
+                    ->formatStateUsing(function (?string $state): string {
+                        $value = strtolower(trim((string) $state));
+
+                        return match ($value) {
+                            'manual', 'm' => 'M',
+                            'automatic', 'auto', 'a' => 'A',
+                            default => strtoupper(substr($value, 0, 1)) ?: '-',
+                        };
+                    }),
                 Tables\Columns\TextColumn::make('passengers'),
                 Tables\Columns\IconColumn::make('active')
                     ->boolean(),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->date(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('name')
+                    ->label('Name')
+                    ->options(fn (): array => Fleet::query()
+                        ->whereNotNull('name')
+                        ->distinct()
+                        ->orderBy('name')
+                        ->pluck('name', 'name')
+                        ->toArray())
+                    ->searchable(),
+                Tables\Filters\SelectFilter::make('model')
+                    ->label('Model')
+                    ->options(fn (): array => Fleet::query()
+                        ->whereNotNull('model')
+                        ->distinct()
+                        ->orderBy('model')
+                        ->pluck('model', 'model')
+                        ->toArray())
+                    ->searchable(),
+                Tables\Filters\SelectFilter::make('year')
+                    ->label('Year')
+                    ->options(fn (): array => Fleet::query()
+                        ->whereNotNull('year')
+                        ->distinct()
+                        ->orderByDesc('year')
+                        ->pluck('year', 'year')
+                        ->toArray()),
+                Tables\Filters\SelectFilter::make('transmission')
+                    ->label('Transmission')
+                    ->options(fn (): array => Fleet::query()
+                        ->whereNotNull('transmission')
+                        ->distinct()
+                        ->orderBy('transmission')
+                        ->pluck('transmission', 'transmission')
+                        ->toArray())
+                    ->searchable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

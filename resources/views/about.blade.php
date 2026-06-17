@@ -128,7 +128,7 @@
       <div class="cta-title">Travel in<br>Style</div>
 
     </div>
-    <a href="#booking" class="btn-white">Book Now &rarr;</a>
+    <a href="{{ route('booking') }}" class="btn-white">Book Now &rarr;</a>
   </div>
 </div>
 
