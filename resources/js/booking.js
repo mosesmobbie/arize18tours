@@ -45,7 +45,6 @@ function initBookingForm() {
     pickupAddressInput,
     pickupDateInput,
     pickupTimeDisplayInput,
-    notesInput,
   ];
 
   function setVisible(element, isVisible) {
@@ -264,8 +263,8 @@ function initBookingForm() {
     setFieldState(dropoffTimeRow, dropoffTimeDisplayInput, isCarHire, true);
     setFieldState(passengersRow, passengersInput, serviceType !== 'car-hire', passengersRequired);
     setFieldState(transmissionRow, transmissionInput, serviceType === 'car-hire', true);
-    setFieldState(flightNumberRow, flightNumberInput, serviceType === 'airport-transfers', true);
-    setFieldState(reservationNumberRow, reservationNumberInput, serviceType === 'hotel-transfers', true);
+    setFieldState(flightNumberRow, flightNumberInput, serviceType === 'airport-transfers', false);
+    setFieldState(reservationNumberRow, reservationNumberInput, serviceType === 'hotel-transfers', false);
     setFieldState(idNumberRow, idNumberInput, serviceType === 'car-hire', true);
 
     if (passengersInput && serviceType === 'car-hire') {

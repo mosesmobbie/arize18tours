@@ -377,7 +377,7 @@
         @isset($contact)
             <div class="footer">
                 <div class="footer-items">
-                    <div class="footer-item">🌐 <a href="https://www.arize18tours.co.za">www.arize18tours.co.za</a></div>
+                    <div class="footer-item">🌐 <a href="https://www.arize18.co.za">www.arize18.co.za</a></div>
                     @if(!empty($contact->website))
                         <div class="footer-item">🌐 <a href="{{ $contact->website }}">{{ $contact->website }}</a></div>
                     @endif

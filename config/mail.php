@@ -112,6 +112,8 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'booking_notification_email' => env('BOOKING_NOTIFICATION_EMAIL', 'booking@arize18.co.za'),
+
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
