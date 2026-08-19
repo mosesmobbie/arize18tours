@@ -25,7 +25,7 @@
                         <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'is-active' : '' }}" @if(request()->routeIs('home')) aria-current="page" @endif>Home</a></li>
                         <li><a href="{{ route('about-us') }}" class="{{ request()->routeIs('about-us') ? 'is-active' : '' }}" @if(request()->routeIs('about-us')) aria-current="page" @endif>About</a></li>
                         <li><a href="{{ route('services', ['slug' => 'shuttle']) }}" class="{{ request()->routeIs('services') ? 'is-active' : '' }}" @if(request()->routeIs('services')) aria-current="page" @endif>Services</a></li>
-                        <li><a href="{{ route('home') }}#fleet">Fleet</a></li>
+                        <li><a href="{{ route('fleet') }}">Fleet</a></li>
                         <li><a href="{{ route('booking') }}" class="{{ request()->routeIs('booking') ? 'is-active' : '' }}" @if(request()->routeIs('booking')) aria-current="page" @endif>Booking</a></li>
                         <li class="nav-mobile-cta"><a href="https://wa.me/{{ $contact->whatsapp }}" class="nav-cta nav-cta-whatsapp"><span class="nav-whatsapp-icon" aria-hidden="true"></span><span>WhatsApp</span></a></li>
                     </ul>

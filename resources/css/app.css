@@ -214,7 +214,7 @@ nav {
 .hero::after {
     content: '';
     position: absolute; inset: 0;
-    background: url('/images/background.jpg') center/cover no-repeat;
+    background: url('../images/hero-background.jpg') center/cover no-repeat;
     opacity: 0.4;
     filter: saturate(0.95) contrast(1.08) brightness(0.95);
     z-index: 0;

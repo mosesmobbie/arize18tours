@@ -28,30 +28,6 @@ Route::get('/fleet', [FleetController::class, 'index'])->name('fleet');
 Route::get('/booking', [Booking::class, 'index'])->name('booking');
 Route::post('/booking', [Booking::class, 'store'])->name('booking.store');
 
-Route::get('/dev/mail/booking-preview', function () {
-    abort_unless(app()->environment('local'), 404);
-
-    $booking = BookingModel::query()->latest()->first() ?? new BookingModel([
-        'service_type' => 'shuttle',
-        'vehicle_type' => 'standard',
-        'name' => 'Demo Customer',
-        'email' => 'demo@example.com',
-        'phone' => '0712345678',
-        'pickup_address' => 'Johannesburg Airport',
-        'dropoff_address' => 'Sandton Hotel',
-        'pickup_time' => now()->addDay()->toDateTimeString(),
-        'dropoff_time' => now()->addDay()->addHour()->toDateTimeString(),
-        'passengers' => 2,
-        'transmission' => 'Auto',
-        'flight_number' => 'SA123',
-        'reservation_number' => 'RES-001',
-        'id_number' => '9001015009087',
-        'notes' => 'Demo preview booking',
-    ]);
-
-    return (new NewBookingNotification($booking))->render();
-})->name('dev.mail.booking-preview');
-
 Route::middleware('auth')->group(function () {
     Route::get('/invoice/preview', [InvoiceController::class, 'preview'])->name('invoice.preview');
     Route::get('/invoice/download', [InvoiceController::class, 'generateInvoice'])->name('invoice.download');

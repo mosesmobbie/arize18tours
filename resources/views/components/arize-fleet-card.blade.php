@@ -5,7 +5,7 @@
     'transmission' => 'Manual',
     'seats' => 'Up to 22 seats',
     'short_description' => 'Group Friendly',
-]);
+])
 <div class="fleet-card">
     <div class="fleet-img">
         <img src="storage/{{ $image }}" alt="{{ $name }}">
